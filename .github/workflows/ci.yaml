@@ -61,13 +61,15 @@ jobs:
 
       - name: Stop existing container
         shell: powershell
+        continue-on-error: true
         run: |
-          docker stop ci-app 2>$null
+          docker stop ci-app
 
       - name: Remove old container
         shell: powershell
+        continue-on-error: true
         run: |
-          docker rm ci-app 2>$null
+          docker rm ci-app
 
       - name: Run new container
         shell: powershell
@@ -76,3 +78,8 @@ jobs:
             -p 80:80 `
             --name ci-app `
             ${env:DOCKER_REGISTRY}/${env:IMAGE_NAME}:${env:IMAGE_TAG}
+
+      - name: Verify container is running
+        shell: powershell
+        run: |
+          docker ps -a
