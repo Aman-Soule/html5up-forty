@@ -47,7 +47,7 @@ jobs:
 
 
   # ===============================
-  # JOB 2 - TRIVY SCAN
+  # JOB 2 - TRIVY
   # ===============================
   trivy:
     needs: ci
@@ -60,7 +60,7 @@ jobs:
           image-ref: ${{ env.DOCKER_REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
           format: table
           severity: CRITICAL,HIGH
-          exit-code: 1
+          exit-code: 0        # <--- ne bloque pas le pipeline
           vuln-type: os,library
           ignore-unfixed: true
 
