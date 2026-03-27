@@ -70,8 +70,7 @@ jobs:
   # ===============================
   deploy:
     needs: trivy
-    runs-on: aws-runner
-
+    runs-on: [self-hosted, Windows, X64]
     steps:
       - name: Pull latest image
         run: |
